@@ -1,0 +1,7 @@
+{
+  "semi": false,
+  "trailingComma": "es5",
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "tabWidth": 2
+}
