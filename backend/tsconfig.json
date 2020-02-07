@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "dist",
+    "rootDir": ".",
+    "sourceMap": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "checkJs": true,
+    "allowJs": true,
+    "alwaysStrict": true,
+    "types": ["node"]
+  }
+}

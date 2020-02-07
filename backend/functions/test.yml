@@ -1,0 +1,8 @@
+order:
+  handler: src/handler/test/test.handler
+  name: ${self:custom.env.StageName}-order
+  events:
+    - http:
+        path: api/test
+        method: get
+        cors: true

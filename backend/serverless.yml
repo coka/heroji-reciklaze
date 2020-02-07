@@ -1,0 +1,33 @@
+service: hackaton
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-webpack
+  - serverless-pseudo-parameters
+  - serverless-prune-plugin
+  - serverless-offline
+  - serverless-layers
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: eu-central-1
+  stage: ${opt:stage,'dev'}
+
+functions:
+  - ${file(./functions/test.yml)}
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+  prune:
+    automatic: true
+    number: 3
+  serverless-layers:
+    packageManger: npm
+    compatibleRuntimes:
+      - nodejs10.x
+    layersDeploymentBucket: invictus-functions-lambda-layers-bucket
+  env:
+    StageName: ${self:service}-${self:provider.stage}
+    region: eu-central-1
