@@ -20,10 +20,18 @@ export class PickupService {
   @TryCatch()
   async post(pickup: PickupModel & { resourceIds: string[] }, user: UserModel) {
     await this.validatePickup(pickup, user);
-    pickup.organizerId = user.id;
-    pickup.status = PICKUP_STATUS.CREATED;
-    pickup.resources = pickup.resourceIds.map(id => ({ id }));
-    return await this.pickupRepository.save(pickup);
+    const newPickup = new PickupModel(pickup);
+    newPickup.status = PICKUP_STATUS.CREATED;
+    newPickup.addressId = pickup.addressId || user.addressId;
+    newPickup.organizerId = user.id;
+    newPickup.resources = pickup.resourceIds.map(id => ({ id }));
+    const createdPickup = await this.pickupRepository.save(newPickup);
+    await Promise.all([
+      this.pushToProviders({ ...pickup, ...createdPickup }),
+      this.pushToCollectors({ ...pickup, ...createdPickup })
+    ]);
+
+    return createdPickup;
   }
 
   @TryCatch()
@@ -42,10 +50,10 @@ export class PickupService {
 
   @TryCatch()
   async validatePickup(pickup: PickupModel & { resourceIds: string[] }, user: UserModel) {
-    if (user.type === USER_TYPE.PROVIDER) {
+    if (user.type === USER_TYPE.COLLECTOR) {
       throw new CustomError(ERROR_MESSAGES.USER.INVALID_ACTION);
     }
-    if (!pickup.pickupDate || !pickup.code || !pickup.organizerId) {
+    if (!pickup.pickupDate || !pickup.code) {
       throw new CustomError(ERROR_MESSAGES.REQUEST.MISSING_PARAMETER);
     }
     if (!pickup.resourceIds || pickup.resourceIds.length === 0) {
@@ -55,5 +63,18 @@ export class PickupService {
     if (resourceIds.length !== pickup.resourceIds.length) {
       throw new CustomError(ERROR_MESSAGES.RESOURCE.NOT_FOUND);
     }
+  }
+
+  @TryCatch()
+  async pushToProviders(pickup: PickupModel & { resourceIds: string[] }) {
+    const providersOnAddress = await this.userRepository.getByAddressIdAndResources(pickup.addressId, pickup.resourceIds);
+    return providersOnAddress;
+  }
+
+  /**TODO */
+  @TryCatch()
+  async pushToCollectors(pickup: PickupModel & { resourceIds: string[] }) {
+    const collectorsOnAddress = await this.userRepository.getByAddressIdAndResources(pickup.addressId, pickup.resourceIds);
+    return collectorsOnAddress;
   }
 }

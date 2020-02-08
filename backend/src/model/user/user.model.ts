@@ -1,7 +1,6 @@
 import { Entity, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { SharedModel } from '../shared.model';
 import * as bcrypt from 'bcrypt';
-import { rejects } from 'assert';
 import { AddressModel } from '../address/address.model';
 import { ResourceModel } from '../resource/resource.model';
 
@@ -38,18 +37,18 @@ export class UserModel extends SharedModel {
     type => AddressModel,
     address => address.id
   )
-  @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'addressId', referencedColumnName: 'id' })
   public address?: AddressModel;
 
   @ManyToMany(type => ResourceModel)
   @JoinTable({
     name: 'user_resource',
     joinColumn: {
-      name: 'user_id',
+      name: 'userId',
       referencedColumnName: 'id'
     },
     inverseJoinColumn: {
-      name: 'resource_id',
+      name: 'resourceId',
       referencedColumnName: 'id'
     }
   })

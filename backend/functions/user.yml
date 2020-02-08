@@ -6,6 +6,18 @@ register:
         method: post
         cors: true
 
+update:
+  handler: src/handler/user/user.update
+  events:
+    - http:
+        path: api/user/
+        method: put
+        cors: true
+        authorizer:
+          name: authorizer
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
+
 login:
   handler: src/handler/user/user.login
   events:

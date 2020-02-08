@@ -23,13 +23,13 @@ export class PickupInvitationModel extends SharedModel {
     type => UserModel,
     user => user.id
   )
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
   user: UserModel;
 
   @ManyToOne(
     type => PickupModel,
     pickup => pickup.id
   )
-  @JoinColumn({ name: 'pickup_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'pickupId', referencedColumnName: 'id' })
   pickup: PickupModel;
 }

@@ -16,7 +16,7 @@ export class PickupModel extends SharedModel {
   @Column({ type: 'varchar', nullable: false })
   organizerId: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   collectorId: string;
 
   @Column({ type: 'date', nullable: false })
@@ -35,34 +35,42 @@ export class PickupModel extends SharedModel {
     type => UserModel,
     user => user.id
   )
-  @JoinColumn({ name: 'collector_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'collectorId', referencedColumnName: 'id' })
   collector: UserModel;
 
   @ManyToOne(
     type => UserModel,
     user => user.id
   )
-  @JoinColumn({ name: 'organizer_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'organizerId', referencedColumnName: 'id' })
   organizer: UserModel;
 
   @ManyToOne(
     type => AddressModel,
     address => address.id
   )
-  @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'addressId', referencedColumnName: 'id' })
   address: AddressModel;
 
   @ManyToMany(type => ResourceModel)
   @JoinTable({
     name: 'pickup_resources',
     joinColumn: {
-      name: 'pickup_id',
+      name: 'pickupId',
       referencedColumnName: 'id'
     },
     inverseJoinColumn: {
-      name: 'resource_id',
+      name: 'resourceId',
       referencedColumnName: 'id'
     }
   })
   resources: ResourceModel[];
+
+  constructor(params: any) {
+    super();
+    if (params) {
+      this.code = params.code;
+      this.pickupDate = new Date(params.pickupDate);
+    }
+  }
 }

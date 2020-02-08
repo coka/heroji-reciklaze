@@ -1,12 +1,11 @@
 import { CustomRepository } from '../repository';
-import { UserModel } from '../../model/user/user.model';
 import { getConnection } from '../../config/connection';
 import { PickupModel } from '../../model/pickup/pickup.model';
 import { TryCatch } from '../../util/try-catch';
 
 export class PickupRepository extends CustomRepository<PickupModel> {
   constructor() {
-    super(UserModel);
+    super(PickupModel);
   }
 
   @TryCatch()

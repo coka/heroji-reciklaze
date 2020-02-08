@@ -7,16 +7,24 @@ import * as bcrypt from 'bcrypt';
 import { SessionService } from '../../util/session';
 import { ResourceRepository } from '../../repository/resource/resource.repository';
 import { validateEmail } from '../../util/validators';
+import { AddressService } from '../address/address.service';
 
 export class UserService {
   private userRepository = new UserRepository();
   private sessionService = new SessionService();
   private resourceRepository = new ResourceRepository();
+  private addressService = new AddressService();
+
   @TryCatch()
-  async create(user: UserModel & { resourceIds?: string[] }) {
+  async create(user: UserModel & { resourceIds?: string[]; addressValue: string }) {
     await this.validateUser(user);
     const newUser = new UserModel(user);
-    newUser.resources = user.resourceIds.map(resource => ({ id: resource }));
+
+    if (newUser.type === USER_TYPE.COLLECTOR) {
+      newUser.resources = user.resourceIds.map(resource => ({ id: resource }));
+    }
+    const address = await this.addressService.findAndCreateIfNotExist(user.addressValue);
+    newUser.addressId = address.id;
     return await this.userRepository.save(newUser);
   }
 
