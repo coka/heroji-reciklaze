@@ -1,15 +1,15 @@
+import { Entypo } from '@expo/vector-icons'
 import React, { useState } from 'react'
 import {
-  StyleSheet,
+  Image,
   KeyboardAvoidingView,
   ScrollView,
-  Image,
-  View,
+  StyleSheet,
   Text,
+  View,
 } from 'react-native'
-import Input from '../components/Input'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Entypo } from '@expo/vector-icons'
+import Input from '../components/Input'
 
 const Separator = () => <View style={{ height: 20 }} />
 
@@ -60,7 +60,10 @@ const RegisterProvider = ({ navigation }) => {
           value={passConfirm}
           onChangeText={setPassConfirm}
         />
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('LoggedInApplication')}
+        >
           <Text style={styles.buttonText}>KERIRAJ NALOG</Text>
         </TouchableOpacity>
       </ScrollView>

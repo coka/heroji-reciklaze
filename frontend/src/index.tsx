@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { useDispatch } from 'react-redux'
-import { appStart } from './store/actions/app'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import Welcome from './screens/Welcome'
-import RegisterProvider from './screens/RegisterProvider'
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack'
+import React, { useEffect } from 'react'
+import { StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
+import LoggedInApplication from './screens/LoggedInApplication'
 import RegisterCollector from './screens/RegisterCollector'
-import { CardStyleInterpolators } from '@react-navigation/stack'
+import RegisterProvider from './screens/RegisterProvider'
+import Welcome from './screens/Welcome'
+import { appStart } from './store/actions/app'
 
 export default () => {
   const dispatch = useDispatch()
@@ -37,6 +40,11 @@ export default () => {
         <Stack.Screen
           name="RegisterCollector"
           component={RegisterCollector}
+          options={navigationOptions}
+        />
+        <Stack.Screen
+          name="LoggedInApplication"
+          component={LoggedInApplication}
           options={navigationOptions}
         />
       </Stack.Navigator>
