@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     marginBottom: 52,
-    marginTop: 15,
+    marginTop: 30,
   },
   logo: {
     height: 50,
