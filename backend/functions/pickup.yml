@@ -1,0 +1,39 @@
+getPickup:
+  handler: src/handler/pickup/pickup.get
+  events:
+    - http:
+        path: api/pickup
+        method: get
+        cors: true
+        authorizer:
+          name: authorizer
+
+postPickup:
+  handler: src/handler/pickup/pickup.post
+  events:
+    - http:
+        path: api/pickup
+        method: post
+        cors: true
+        authorizer:
+          name: authorizer
+
+putPickup:
+  handler: src/handler/pickup/pickup.put
+  events:
+    - http:
+        path: api/pickup
+        method: put
+        cors: true
+        authorizer:
+          name: authorizer
+
+deletePickup:
+  handler: src/handler/pickup/pickup.getdelete
+  events:
+    - http:
+        path: api/pickup
+        method: delete
+        cors: true
+        authorizer:
+          name: authorizer

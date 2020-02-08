@@ -19,6 +19,7 @@ functions:
   - ${file(./functions/user.yml)}
   - ${file(./functions/authorizer.yml)}
   - ${file(./functions/resource.yml)}
+  - ${file(./functions/pickup.yml)}
 
 custom:
   webpack:

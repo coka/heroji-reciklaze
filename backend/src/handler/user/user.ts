@@ -1,6 +1,6 @@
 import { APIGatewayEvent } from 'aws-lambda';
 import { ResponseHandler, ErrorHandler } from '../../util/response-handler';
-import { UserService } from '../../service/user.service';
+import { UserService } from '../../service/user/user.service';
 
 const userService = new UserService();
 

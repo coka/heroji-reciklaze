@@ -19,6 +19,10 @@ export const ERROR_MESSAGES = {
     MISSING_RESOURCES: {
       code: 403,
       message: 'Missing resources for collector'
+    },
+    INVALID_ACTION: {
+      code: 404,
+      message: 'User does not have permission for this'
     }
   },
   REQUEST: {

@@ -1,11 +1,11 @@
-import { UserModel, USER_TYPE } from '../model/user/user.model';
-import { TryCatch } from '../util/try-catch';
-import { CustomError } from '../util/custom-error';
-import { ERROR_MESSAGES } from '../util/error.constant';
-import { UserRepository } from '../repository/user/user.repository';
+import { UserModel, USER_TYPE } from '../../model/user/user.model';
+import { TryCatch } from '../../util/try-catch';
+import { CustomError } from '../../util/custom-error';
+import { ERROR_MESSAGES } from '../../util/error.constant';
+import { UserRepository } from '../../repository/user/user.repository';
 import * as bcrypt from 'bcrypt';
-import { SessionService } from '../util/session';
-import { ResourceRepository } from '../repository/resource/resource.repository';
+import { SessionService } from '../../util/session';
+import { ResourceRepository } from '../../repository/resource/resource.repository';
 
 export class UserService {
   private userRepository = new UserRepository();
@@ -29,7 +29,8 @@ export class UserService {
     if (!passwordValidation) {
       throw new CustomError(ERROR_MESSAGES.USER.NOT_EXIST);
     }
-    return await this.sessionService.createSession(existingUser.id);
+    const session = await this.sessionService.createSession(existingUser.id);
+    return { user: existingUser, session };
   }
 
   @TryCatch()

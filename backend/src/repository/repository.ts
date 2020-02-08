@@ -15,4 +15,9 @@ export class CustomRepository<Model> {
   async findAll() {
     return (await getConnection()).getRepository(this.entity).find();
   }
+
+  @TryCatch()
+  async findById(id: string) {
+    return (await getConnection()).getRepository(this.entity).findOne(id);
+  }
 }
