@@ -1,1 +1,4 @@
-const fetchResources = () => ({ type: 'FETCH_RESOURCES' } as const)
+export const fetchResources = () =>
+  ({
+    type: 'FETCH_RESOURCES',
+  } as const)
