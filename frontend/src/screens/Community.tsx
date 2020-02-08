@@ -1,11 +1,10 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
-import GreenButton from '../components/GreenButton'
 import Header from '../components/Header'
 import PickupList from '../components/PickupList'
 
-const Pickups = () => {
+const Community = () => {
   const insets = useSafeArea()
 
   return (
@@ -16,9 +15,6 @@ const Pickups = () => {
       }}
     >
       <Header />
-      <View style={styles.buttonContainer}>
-        <GreenButton label="ZAKAŽI NOVO PREUZIMANJE" />
-      </View>
       <View style={styles.pickupListContainer}>
         <PickupList />
       </View>
@@ -27,14 +23,10 @@ const Pickups = () => {
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    marginBottom: 118,
-    marginHorizontal: 20,
-  },
   pickupListContainer: {
     flex: 1,
     marginHorizontal: 35,
   },
 })
 
-export default Pickups
+export default Community

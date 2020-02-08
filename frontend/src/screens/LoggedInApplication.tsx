@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import About from './About'
+import Community from './Community'
 import Pickups from './Pickups'
 
 const Tab = createBottomTabNavigator()
@@ -59,7 +60,7 @@ const LoggedInApplication = () => (
     />
     <Tab.Screen
       name="Community"
-      component={Pickups}
+      component={Community}
       options={{
         tabBarLabel: ({ focused }) => {
           const opacity = focused ? 1 : 0.6
