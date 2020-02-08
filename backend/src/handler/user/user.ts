@@ -24,7 +24,8 @@ export const login = async (event: APIGatewayEvent) => {
 
 export const logout = async (event: APIGatewayEvent) => {
   try {
-    const newUser = await userService.logout(JSON.parse(event.body));
+    console.log('!!', event.requestContext.authorizer);
+    const newUser = await userService.logout(event.requestContext.authorizer);
     return ResponseHandler(newUser, 200);
   } catch (error) {
     return ErrorHandler(error);

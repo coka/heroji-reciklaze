@@ -9,6 +9,6 @@ export class UserRepository extends CustomRepository<UserModel> {
   }
   @TryCatch()
   async getOneByEmail(email: string) {
-    return (await getConnection()).getRepository(UserModel).findOne({ email });
+    return (await getConnection()).getRepository(UserModel).findOne({ email }, { relations: ['resources'] });
   }
 }

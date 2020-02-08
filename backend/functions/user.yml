@@ -20,7 +20,8 @@ logout:
     - http:
         path: api/user/logout/
         method: get
-        cors:
-          origin: '*'
-          headers:
-            - Authorization
+        cors: true
+        authorizer:
+          name: authorizer
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0

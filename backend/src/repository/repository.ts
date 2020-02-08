@@ -10,4 +10,9 @@ export class CustomRepository<Model> {
   async create(model: Model) {
     return (await getConnection()).getRepository(this.entity).save(model);
   }
+
+  @TryCatch()
+  async findAll() {
+    return (await getConnection()).getRepository(this.entity).find();
+  }
 }

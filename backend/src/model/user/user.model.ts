@@ -1,7 +1,9 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { SharedModel } from '../shared.model';
 import * as bcrypt from 'bcrypt';
 import { rejects } from 'assert';
+import { AddressModel } from '../address/address.model';
+import { ResourceModel } from '../resource/resource.model';
 
 export enum USER_TYPE {
   COLLECTOR = 1,
@@ -31,6 +33,27 @@ export class UserModel extends SharedModel {
 
   @Column({ type: 'varchar', nullable: false })
   password: string;
+
+  @ManyToOne(
+    type => AddressModel,
+    address => address.id
+  )
+  @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
+  public address?: AddressModel;
+
+  @ManyToMany(type => ResourceModel)
+  @JoinTable({
+    name: 'user_resource',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'resource_id',
+      referencedColumnName: 'id'
+    }
+  })
+  resources: ResourceModel[];
 
   constructor(user?: any) {
     super();

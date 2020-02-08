@@ -22,10 +22,10 @@ export class DynamoDatabaseService {
     });
   }
 
-  getOneFromTable<Type = any>(tableName: string, id: any): Promise<Type> {
+  getOneFromTable<Type = any>(tableName: string, sessionId: string): Promise<Type> {
     return new Promise((resolve, reject) => {
       this.dynamodb
-        .get({ Key: { id }, TableName: tableName })
+        .get({ Key: { sessionId }, TableName: tableName })
         .promise()
         .then(res => {
           resolve((res.Item as Type) || null);
@@ -36,10 +36,10 @@ export class DynamoDatabaseService {
     });
   }
 
-  deleteOneFromTable(tableName: string, id: string): Promise<any> {
+  deleteOneFromTable(tableName: string, sessionId: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.dynamodb
-        .delete({ Key: { id }, TableName: tableName })
+        .delete({ Key: { sessionId }, TableName: tableName })
         .promise()
         .then(res => {
           resolve(res);

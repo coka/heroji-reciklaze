@@ -15,6 +15,10 @@ export const ERROR_MESSAGES = {
     NOT_EXIST: {
       code: 403,
       message: 'User does not exist'
+    },
+    MISSING_RESOURCES: {
+      code: 403,
+      message: 'Missing resources for collector'
     }
   },
   REQUEST: {
@@ -27,6 +31,12 @@ export const ERROR_MESSAGES = {
     NOT_CREATED: {
       code: 400,
       message: 'Session not created'
+    }
+  },
+  RESOURCE: {
+    NOT_FOUND: {
+      code: 404,
+      message: 'Resource not found'
     }
   }
 };

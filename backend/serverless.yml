@@ -17,6 +17,8 @@ provider:
 functions:
   - ${file(./functions/test.yml)}
   - ${file(./functions/user.yml)}
+  - ${file(./functions/authorizer.yml)}
+  - ${file(./functions/resource.yml)}
 
 custom:
   webpack:

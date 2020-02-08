@@ -1,6 +1,6 @@
-order:
+test:
   handler: src/handler/test/test.handler
-  name: ${self:custom.env.StageName}-order
+  name: test
   events:
     - http:
         path: api/test

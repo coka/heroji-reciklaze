@@ -1,0 +1,7 @@
+getResource:
+  handler: src/handler/enum/resource.handler
+  events:
+    - http:
+        path: api/resource
+        method: get
+        cors: true
