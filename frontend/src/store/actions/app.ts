@@ -9,4 +9,7 @@ export const appStartSuccess = () =>
   } as const)
 
 export const appStartFailure = error =>
-  ({ type: 'APP_START_FAILURE', error } as const)
+  ({
+    type: 'APP_START_FAILURE',
+    error,
+  } as const)

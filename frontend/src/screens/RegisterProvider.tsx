@@ -52,11 +52,17 @@ const RegisterProvider = ({ navigation }) => {
         />
         <Separator />
         <Input label="Email" value={email} onChangeText={setEmail} />
-        <Input label="Lozinka" value={password} onChangeText={setPassword} />
+        <Input
+          label="Lozinka"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
         <Input
           label="Ponovi lozinku"
           value={passConfirm}
           onChangeText={setPassConfirm}
+          secureTextEntry
         />
         <TouchableOpacity
           style={styles.button}
