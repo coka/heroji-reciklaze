@@ -1,4 +1,4 @@
-import { createReducer } from "."
+import { createReducer } from '.'
 
 const initialState = {}
 

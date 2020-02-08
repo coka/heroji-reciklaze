@@ -1,8 +1,8 @@
-import { createStore, combineReducers, applyMiddleware, compose } from "redux"
-import appReducer from "./reducers/app"
-import createSagaMiddleware from "redux-saga"
-import appSaga from "./saga/app"
-import logger from "redux-logger"
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import appReducer from './reducers/app'
+import createSagaMiddleware from 'redux-saga'
+import appSaga from './saga/app'
+import logger from 'redux-logger'
 
 const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers({

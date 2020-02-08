@@ -1,4 +1,4 @@
 export const appStart = () =>
   ({
-    type: "APP_START",
+    type: 'APP_START',
   } as const)
