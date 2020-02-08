@@ -1,5 +1,5 @@
 import { SharedModel } from '../shared.model';
-import { Column, ManyToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, ManyToMany, ManyToOne, JoinColumn, Entity } from 'typeorm';
 import { UserModel } from '../user/user.model';
 import { PickupModel } from './pickup.model';
 
@@ -8,7 +8,7 @@ export enum PICKUP_INVITATION_STATUS {
   ACCEPTED = 2,
   DECLINED = 3
 }
-
+@Entity()
 export class PickupInvitationModel extends SharedModel {
   @Column({ type: 'varchar', nullable: false })
   pickupId: string;

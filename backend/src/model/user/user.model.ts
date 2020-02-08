@@ -30,7 +30,7 @@ export class UserModel extends SharedModel {
   @Column({ type: 'int', nullable: false })
   type: USER_TYPE;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: false, select: false })
   password: string;
 
   @ManyToOne(

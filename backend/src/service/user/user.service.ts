@@ -71,6 +71,15 @@ export class UserService {
   }
 
   @TryCatch()
+  async update(updateData: UserModel & { resourceIds?: string[] }, authorizer: any) {
+    const user = await this.userRepository.findById(authorizer.userId);
+    if (updateData.resourceIds && updateData.resourceIds.length > 0) {
+      user.resources = updateData.resourceIds.map(id => ({ id }));
+    }
+    return await this.userRepository.save(user);
+  }
+
+  @TryCatch()
   async logout(authorizer: any) {
     const sessionId = authorizer.sessionId;
     return await this.sessionService.deleteSession(sessionId);

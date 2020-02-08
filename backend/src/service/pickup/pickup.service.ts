@@ -6,11 +6,13 @@ import { CustomError } from '../../util/custom-error';
 import { ERROR_MESSAGES } from '../../util/error.constant';
 import { UserRepository } from '../../repository/user/user.repository';
 import { ResourceRepository } from '../../repository/resource/resource.repository';
+import { PickupInvitationService } from './pickup-invitation.service';
 
 export class PickupService {
   private pickupRepository = new PickupRepository();
   private userRepository = new UserRepository();
   private resourceRepository = new ResourceRepository();
+  private pickupInvitationService = new PickupInvitationService();
 
   @TryCatch()
   async get(user: UserModel) {
@@ -27,11 +29,11 @@ export class PickupService {
     newPickup.resources = pickup.resourceIds.map(id => ({ id }));
     const createdPickup = await this.pickupRepository.save(newPickup);
     await Promise.all([
-      this.pushToProviders({ ...pickup, ...createdPickup }),
-      this.pushToCollectors({ ...pickup, ...createdPickup })
+      this.pushToProviders(createdPickup, pickup.resourceIds),
+      this.pushToCollector(createdPickup, pickup.resourceIds)
     ]);
-
-    return createdPickup;
+    const invitations = await this.pickupInvitationService.createInvitations(createdPickup, createdPickup.collectorId);
+    return await this.pickupRepository.save(createdPickup);
   }
 
   @TryCatch()
@@ -66,15 +68,16 @@ export class PickupService {
   }
 
   @TryCatch()
-  async pushToProviders(pickup: PickupModel & { resourceIds: string[] }) {
-    const providersOnAddress = await this.userRepository.getByAddressIdAndResources(pickup.addressId, pickup.resourceIds);
+  async pushToProviders(pickup: PickupModel, resourceIds: string[]) {
+    const providersOnAddress = await this.userRepository.getByAddressIdAndResources(pickup.addressId, resourceIds, false);
     return providersOnAddress;
   }
 
-  /**TODO */
   @TryCatch()
-  async pushToCollectors(pickup: PickupModel & { resourceIds: string[] }) {
-    const collectorsOnAddress = await this.userRepository.getByAddressIdAndResources(pickup.addressId, pickup.resourceIds);
-    return collectorsOnAddress;
+  async pushToCollector(pickup: PickupModel, resourceIds: string[]) {
+    const collectorsOnAddress = await this.userRepository.getByAddressIdAndResources(pickup.addressId, resourceIds, true);
+    const index = Math.floor(Math.random() * collectorsOnAddress.length);
+    const selectedCollector = collectorsOnAddress[index];
+    pickup.collectorId = selectedCollector.id;
   }
 }
