@@ -7,6 +7,15 @@ import Community from './Community'
 
 const Tab = createBottomTabNavigator()
 
+const shouldShowTabBar = (route: any): boolean => {
+  if (!route.state) {
+    return true
+  }
+
+  const { routeNames, index } = route.state
+  return routeNames[index] !== 'NewPickup'
+}
+
 const ProfileScreen = () => (
   <View style={styles.container}>
     <Text>PROFILE</Text>
@@ -56,10 +65,7 @@ const LoggedInApplication = () => (
             </View>
           )
         },
-        tabBarVisible:
-          // TODO: Figure out why TypeScript screams here.
-          // @ts-ignore
-          route.state.routeNames[route.state.index] !== 'NewPickup',
+        tabBarVisible: shouldShowTabBar(route),
       })}
     />
     <Tab.Screen
