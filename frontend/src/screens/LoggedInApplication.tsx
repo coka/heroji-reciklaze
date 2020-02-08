@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
+import PickupsStack from '../../navigation/PickupsStack'
 import About from './About'
 import Community from './Community'
-import Pickups from './Pickups'
 
 const Tab = createBottomTabNavigator()
 
@@ -41,8 +41,8 @@ const LoggedInApplication = () => (
     />
     <Tab.Screen
       name="Pickups"
-      component={Pickups}
-      options={{
+      component={PickupsStack}
+      options={({ route }) => ({
         tabBarLabel: ({ focused }) => {
           const opacity = focused ? 1 : 0.6
           return (
@@ -56,7 +56,11 @@ const LoggedInApplication = () => (
             </View>
           )
         },
-      }}
+        tabBarVisible:
+          // TODO: Figure out why TypeScript screams here.
+          // @ts-ignore
+          route.state.routeNames[route.state.index] !== 'NewPickup',
+      })}
     />
     <Tab.Screen
       name="Community"

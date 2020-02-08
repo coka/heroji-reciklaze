@@ -5,7 +5,11 @@ import GreenButton from '../components/GreenButton'
 import Header from '../components/Header'
 import PickupList from '../components/PickupList'
 
-const Pickups = () => {
+interface PickupsProps {
+  navigation: any
+}
+
+const Pickups = ({ navigation }: PickupsProps) => {
   const insets = useSafeArea()
 
   return (
@@ -17,7 +21,12 @@ const Pickups = () => {
     >
       <Header />
       <View style={styles.buttonContainer}>
-        <GreenButton label="ZAKAŽI NOVO PREUZIMANJE" />
+        <GreenButton
+          label="ZAKAŽI NOVO PREUZIMANJE"
+          onPress={() => {
+            navigation.navigate('NewPickup')
+          }}
+        />
       </View>
       <View style={styles.pickupListContainer}>
         <PickupList />
