@@ -6,3 +6,6 @@ order:
         path: api/test
         method: get
         cors: true
+        # authorizer:
+        #   name: authorizer
+        #   identitySource: method.request.header.session

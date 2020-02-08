@@ -16,6 +16,7 @@ provider:
 
 functions:
   - ${file(./functions/test.yml)}
+  - ${file(./functions/user.yml)}
 
 custom:
   webpack:

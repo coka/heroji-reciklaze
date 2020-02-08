@@ -1,9 +1,8 @@
+import { ResponseHandler } from '../../util/response-handler';
+
 export const handler = async (event: any) => {
   try {
-    return {
-      statusCode: 200,
-      body: 'wow'
-    };
+    return ResponseHandler({ statusCode: 200, body: { resp: event } });
   } catch (e) {
     console.log(e);
   }

@@ -1,0 +1,26 @@
+register:
+  handler: src/handler/user/user.register
+  events:
+    - http:
+        path: api/user/register/
+        method: post
+        cors: true
+
+login:
+  handler: src/handler/user/user.login
+  events:
+    - http:
+        path: api/user/login/
+        method: post
+        cors: true
+
+logout:
+  handler: src/handler/user/user.logout
+  events:
+    - http:
+        path: api/user/logout/
+        method: get
+        cors:
+          origin: '*'
+          headers:
+            - Authorization
