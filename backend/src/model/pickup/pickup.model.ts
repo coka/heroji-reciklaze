@@ -1,12 +1,14 @@
-import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
 import { SharedModel } from '../shared.model';
 import { UserModel } from '../user/user.model';
 import { AddressModel } from '../address/address.model';
+import { ResourceModel } from '../resource/resource.model';
 
 export enum PICKUP_STATUS {
   CREATED = 1,
-  SUCCESSFULL = 2,
-  FAILED = 3
+  MATCHED = 2,
+  SUCCESSFULL = 3,
+  FAILED = 4
 }
 
 @Entity()
@@ -49,4 +51,18 @@ export class PickupModel extends SharedModel {
   )
   @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
   address: AddressModel;
+
+  @ManyToMany(type => ResourceModel)
+  @JoinTable({
+    name: 'pickup_resources',
+    joinColumn: {
+      name: 'pickup_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'resource_id',
+      referencedColumnName: 'id'
+    }
+  })
+  resources: ResourceModel[];
 }

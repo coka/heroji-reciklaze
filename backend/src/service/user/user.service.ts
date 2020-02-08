@@ -6,6 +6,7 @@ import { UserRepository } from '../../repository/user/user.repository';
 import * as bcrypt from 'bcrypt';
 import { SessionService } from '../../util/session';
 import { ResourceRepository } from '../../repository/resource/resource.repository';
+import { validateEmail } from '../../util/validators';
 
 export class UserService {
   private userRepository = new UserRepository();
@@ -16,7 +17,7 @@ export class UserService {
     await this.validateUser(user);
     const newUser = new UserModel(user);
     newUser.resources = user.resourceIds.map(resource => ({ id: resource }));
-    return await this.userRepository.create(newUser);
+    return await this.userRepository.save(newUser);
   }
 
   @TryCatch()
@@ -37,6 +38,9 @@ export class UserService {
   async validateUser(user: UserModel & { resourceIds?: string[] }) {
     if (!user.email || !user.password || !user.firstName || !user.lastName || !user.phone) {
       throw new CustomError(ERROR_MESSAGES.REQUEST.MISSING_PARAMETER);
+    }
+    if (!validateEmail(user.email)) {
+      throw new CustomError(ERROR_MESSAGES.USER.INVALID_EMAIL);
     }
     if (!Object.values(USER_TYPE).includes(user.type)) {
       throw new CustomError(ERROR_MESSAGES.REQUEST.MISSING_PARAMETER);

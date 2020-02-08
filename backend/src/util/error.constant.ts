@@ -23,6 +23,10 @@ export const ERROR_MESSAGES = {
     INVALID_ACTION: {
       code: 404,
       message: 'User does not have permission for this'
+    },
+    INVALID_EMAIL: {
+      code: 400,
+      message: 'Email format not valid'
     }
   },
   REQUEST: {
@@ -41,6 +45,16 @@ export const ERROR_MESSAGES = {
     NOT_FOUND: {
       code: 404,
       message: 'Resource not found'
+    }
+  },
+  PICKUP: {
+    NOT_FOUND: {
+      code: 404,
+      message: 'Pickup not found'
+    },
+    ALREADY_MATCHED: {
+      code: 409,
+      message: 'Pickup already matched'
     }
   }
 };
