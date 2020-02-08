@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { View, ImageBackground, StyleSheet, Image, Text } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import Input from '../components/Input'
+import { useDispatch } from 'react-redux'
+import { login } from '../store/actions/auth'
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   return (
     <ImageBackground
@@ -37,7 +40,8 @@ const Login = ({ navigation }) => {
           />
           <TouchableOpacity
             style={styles.button}
-            disabled={!email.match(/.*@.*\.com/)}
+            disabled={!email.match(/.*@.*\..*/)}
+            onPress={() => dispatch(login({ email, password }))}
           >
             <Text style={styles.buttonText}>ULOGUJ SE</Text>
           </TouchableOpacity>

@@ -66,7 +66,7 @@ const RegisterProvider = ({ navigation }) => {
         />
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('LoggedInApplication')}
+          onPress={() => navigation.navigate('MainStack')}
         >
           <Text style={styles.buttonText}>KERIRAJ NALOG</Text>
         </TouchableOpacity>
