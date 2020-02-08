@@ -1,8 +1,7 @@
 import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
-
-const logo = require('../../assets/logo.png')
+import Header from '../components/Header'
 
 const About = () => {
   const insets = useSafeArea()
@@ -15,9 +14,7 @@ const About = () => {
       }}
     >
       <ScrollView>
-        <View style={styles.logoContainer}>
-          <Image style={styles.logo} source={logo} />
-        </View>
+        <Header />
         <View style={styles.contentContainer}>
           <Text style={styles.text}>
             JCI Novi Sad i Telenor fondacija veruju da je došlo vreme da sve
@@ -50,15 +47,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingHorizontal: 18,
     paddingVertical: 32,
-  },
-  logo: {
-    height: 50,
-    width: 134,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    marginBottom: 52,
-    marginTop: 15,
   },
   text: {
     color: '#ffffff',

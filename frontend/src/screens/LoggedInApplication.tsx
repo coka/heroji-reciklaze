@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import About from './About'
+import Pickups from './Pickups'
 
 const Tab = createBottomTabNavigator()
 
@@ -11,23 +12,11 @@ const ProfileScreen = () => (
   </View>
 )
 
-const PickupsScreen = () => (
-  <View style={styles.container}>
-    <Text>PICKUPS</Text>
-  </View>
-)
-
-const CommunityScreen = () => (
-  <View style={styles.container}>
-    <Text>COMMUNITY</Text>
-  </View>
-)
-
 const LoggedInApplication = () => (
   <Tab.Navigator>
     <Tab.Screen name="Profile" component={ProfileScreen} />
-    <Tab.Screen name="Pickups" component={PickupsScreen} />
-    <Tab.Screen name="Community" component={CommunityScreen} />
+    <Tab.Screen name="Pickups" component={Pickups} />
+    <Tab.Screen name="Community" component={Pickups} />
     <Tab.Screen name="About" component={About} />
   </Tab.Navigator>
 )
