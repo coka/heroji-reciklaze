@@ -9,7 +9,8 @@ import { useDispatch } from 'react-redux'
 import LoggedInApplication from './screens/LoggedInApplication'
 import RegisterCollector from './screens/RegisterCollector'
 import RegisterProvider from './screens/RegisterProvider'
-import Welcome from './screens/Welcome'
+import Register from './screens/Register'
+import Login from './screens/Login'
 import { appStart } from './store/actions/app'
 
 export default () => {
@@ -26,10 +27,15 @@ export default () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName="Welcome">
+      <Stack.Navigator headerMode="none" initialRouteName="Login">
         <Stack.Screen
-          name="Welcome"
-          component={Welcome}
+          name="Login"
+          component={Login}
+          options={navigationOptions}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
           options={navigationOptions}
         />
         <Stack.Screen

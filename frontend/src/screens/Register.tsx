@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const Welcome = ({ navigation }) => {
+const Register = ({ navigation }) => {
   return (
     <View>
       <ImageBackground
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
 })
-export default Welcome
+export default Register

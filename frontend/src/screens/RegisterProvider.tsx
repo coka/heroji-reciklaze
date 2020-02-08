@@ -26,11 +26,11 @@ const RegisterProvider = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.screen} behavior="height" enabled>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <TouchableOpacity
-            style={{ flex: 1, height: '100%', backgroundColor: 'blue' }}
-          >
-            <Entypo name="chevron-left" size={36} />
-          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Entypo name="chevron-left" size={36} color="darkgrey" />
+            </TouchableOpacity>
+          </View>
           <View style={styles.logoContainer}>
             <Image
               style={styles.logo}
@@ -38,9 +38,7 @@ const RegisterProvider = ({ navigation }) => {
               resizeMode="contain"
             />
           </View>
-          <TouchableOpacity
-            style={{ flex: 1, height: '100%', backgroundColor: 'blue' }}
-          ></TouchableOpacity>
+          <View style={{ flex: 1 }} />
         </View>
         <Input label="Ime" value={ime} onChangeText={setIme} />
         <Input label="Prezime" value={prezime} onChangeText={setPrezime} />
@@ -77,7 +75,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 20,
     alignItems: 'center',
-    backgroundColor: 'red',
   },
   logoContainer: {
     flex: 4,

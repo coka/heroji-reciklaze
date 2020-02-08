@@ -1,7 +1,13 @@
-import { takeLatest } from 'redux-saga/effects'
+import { takeLatest, put, call } from 'redux-saga/effects'
+import { getResource } from '../api/app'
 
 function* appStart(action) {
-  console.log('%c!DEBUG!%c action: %o', 'background-color:#f80;', '', action)
+  try {
+    yield put(fetchResources())
+    put({ type: 'APP_START_SUCCESS' })
+  } catch (error) {
+    put({ type: 'APP_START_FAILURE', error })
+  }
 }
 
 export default function*() {
