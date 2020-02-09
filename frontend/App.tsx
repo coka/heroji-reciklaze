@@ -1,14 +1,19 @@
+import { AppLoading } from 'expo'
+import { loadAsync } from 'expo-font'
 import React, { useState } from 'react'
 import { Provider } from 'react-redux'
-import store from './src/store'
 import App from './src'
-import { loadAsync } from 'expo-font'
-import { AppLoading } from 'expo'
+import store from './src/store'
 
 const fetchFonts = () =>
   loadAsync({
     oswald: require('./assets/fonts/Oswald-Regular.ttf'),
     lato: require('./assets/fonts/Lato-Regular.ttf'),
+
+    italic: require('./assets/fonts/SourceSansPro-Italic.ttf'),
+    light: require('./assets/fonts/SourceSansPro-Light.ttf'),
+    regular: require('./assets/fonts/SourceSansPro-Regular.ttf'),
+    semiBold: require('./assets/fonts/SourceSansPro-SemiBold.ttf'),
   })
 
 export default () => {

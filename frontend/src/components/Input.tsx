@@ -1,50 +1,38 @@
 import React from 'react'
-import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native'
+import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native'
+import { colors, fonts } from '../StyleGuide'
 
 interface InputProps extends TextInputProps {
   label: string
   white?: boolean
 }
 
-const Input = (props: InputProps) => {
-  return (
-    <View style={styles.container}>
-      <Text style={props.white ? styles.whiteLabel : styles.label}>
-        {props.label}
-      </Text>
-      <TextInput
-        style={props.white ? styles.whiteInput : styles.input}
-        {...props}
-      />
-    </View>
-  )
-}
+const Input = (props: InputProps) => (
+  <View>
+    <Text style={styles.label}>{props.label}</Text>
+    <TextInput style={styles.input} selectionColor={colors.white} {...props} />
+    <View style={styles.underline} />
+  </View>
+)
+
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 10,
-    alignSelf: 'stretch',
-  },
   input: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'darkgray',
-    color: 'dimgray',
-    fontFamily: 'lato',
-  },
-  whiteInput: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'white',
-    color: 'white',
-    fontFamily: 'lato',
+    color: colors.white,
+    fontFamily: fonts.regular,
+    fontSize: 18,
+    lineHeight: 23,
+    marginBottom: 5,
+    marginTop: 12,
   },
   label: {
-    color: 'darkgray',
-    fontFamily: 'lato',
-    fontSize: 12,
+    color: colors.white,
+    fontFamily: fonts.light,
+    fontSize: 16,
+    lineHeight: 18,
   },
-  whiteLabel: {
-    color: 'white',
-    fontFamily: 'lato',
-    fontSize: 12,
+  underline: {
+    backgroundColor: colors.white,
+    height: 1,
   },
 })
 
