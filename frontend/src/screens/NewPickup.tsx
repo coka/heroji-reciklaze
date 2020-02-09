@@ -5,7 +5,7 @@ import GreenButton from '../components/GreenButton'
 import Input from '../components/Input'
 import ResourceSelector from '../components/ResourceSelector'
 import { ScrollView } from 'react-native-gesture-handler'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createPickup } from '../store/actions/pickup'
 
 interface NewPickupProps {
@@ -14,7 +14,11 @@ interface NewPickupProps {
 
 const NewPickup = ({ navigation }: NewPickupProps) => {
   const dispatch = useDispatch()
-  const [resources, setResources] = useState([])
+  const [resourceIds, setResourceIds] = useState([])
+  const [code, setCode] = useState('2G3H4')
+  const [pickupDate, setPickupDate] = useState(Date.now())
+
+  const pickups = useSelector(({ pickup }) => pickup.pickups)
 
   return (
     <View style={styles.container}>
@@ -30,7 +34,7 @@ const NewPickup = ({ navigation }: NewPickupProps) => {
           <View style={{ marginTop: 34 }}>
             <Text style={styles.title}>Odaberite vrstu otpada:</Text>
           </View>
-          <ResourceSelector sendResources={setResources} />
+          <ResourceSelector sendResources={setResourceIds} />
           <View style={{ marginTop: 35 }}>
             <Text style={styles.title}>
               Odaberite datum i vreme preuzimanja:
@@ -44,7 +48,12 @@ const NewPickup = ({ navigation }: NewPickupProps) => {
           <View style={{ marginTop: 35 }}>
             <Text style={styles.title}>Dodeli bezbednosnu šifru:</Text>
           </View>
-          <Input label="Bezbednosna šifra*" value="2G3H4" white />
+          <Input
+            label="Bezbednosna šifra*"
+            value={code}
+            white
+            onChangeText={setCode}
+          />
           <Text>
             TODO: Bezbednosna šifra sastoji se od 5 proizvoljnih karaktera
           </Text>
@@ -57,9 +66,16 @@ const NewPickup = ({ navigation }: NewPickupProps) => {
             white
           />
           <GreenButton
+            disabled={resourceIds.length === 0}
             label="ZAKAŽI"
             onPress={() => {
-              dispatch(createPickup({}))
+              dispatch(
+                createPickup({
+                  resourceIds,
+                  code,
+                  pickupDate,
+                })
+              )
             }}
           />
           <GreenButton

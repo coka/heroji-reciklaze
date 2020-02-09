@@ -1,7 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native'
 
-interface GreenButtonProps {
+interface GreenButtonProps extends TouchableOpacityProps {
   label: string
   onPress: () => void
 }

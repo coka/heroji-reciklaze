@@ -4,6 +4,7 @@ const initialState = {
   loading: false,
   pickups: [],
   error: null,
+  added: false,
 }
 
 export default createReducer(initialState, {
@@ -15,5 +16,18 @@ export default createReducer(initialState, {
     ...state,
     pickups,
     loading: false,
+  }),
+  CREATE_PICKUP: state => ({
+    ...state,
+    added: false,
+  }),
+  CREATE_PICKUP_SUCCESS: (state, { pickup }) => ({
+    ...state,
+    pickups: [pickup, ...state.pickups],
+    added: true,
+  }),
+  CREATE_PICKUP_FAILURE: (state, { error }) => ({
+    ...state,
+    error,
   }),
 })

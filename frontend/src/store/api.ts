@@ -6,7 +6,20 @@ export const get = async (path, payload = {}) =>
 export const authorizedGet = async (path: string, token: string) =>
   (await fetch(URL + path, { headers: { Authorization: token } })).json()
 
-export const post = async (path, payload = {}) =>
+export const post = async (path, payload = {}, token = '') =>
   (
-    await fetch(URL + path, { method: 'POST', body: JSON.stringify(payload) })
+    await fetch(URL + path, {
+      method: 'POST',
+      headers: { Authorization: token },
+      body: JSON.stringify(payload),
+    })
+  ).json()
+
+export const del = async (path, payload = {}, token = '') =>
+  (
+    await fetch(URL + path, {
+      method: 'DELETE',
+      headers: { Authorization: token },
+      body: JSON.stringify(payload),
+    })
   ).json()

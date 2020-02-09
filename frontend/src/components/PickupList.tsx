@@ -1,5 +1,8 @@
 import React from 'react'
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { acceptPickup, declinePickup } from '../store/actions/pickup'
+import { useDispatch } from 'react-redux'
 
 interface PickupListProps {
   pickups: Array<Pickup>
@@ -9,7 +12,7 @@ const PickupList = ({ pickups }: PickupListProps) => (
   <FlatList
     data={pickups}
     keyExtractor={pickup => pickup.id}
-    renderItem={({ item }) => <Pickup pickup={item} />}
+    renderItem={({ item }) => <CollectorsPickup pickup={item} />}
     ItemSeparatorComponent={Separator}
   />
 )
@@ -27,6 +30,32 @@ const Pickup = ({ pickup }: PickupProps) => {
         </Text>
         <Text style={pickupStyles.text}>{pickup.address.value}</Text>
         <Text style={pickupStyles.text}>{pickup.code}</Text>
+      </View>
+      <View style={pickupStyles.iconsContainer}>
+        {pickup.status === 1 ? <Icons.Successful /> : <Icons.Pending />}
+        <Icons.Edit />
+        <Icons.Cancel />
+      </View>
+    </View>
+  )
+}
+
+const CollectorsPickup = ({ pickup }: PickupProps) => {
+  const dispatch = useDispatch()
+  return (
+    <View style={pickupStyles.container}>
+      <View>
+        <Text style={pickupStyles.text}>
+          {pickup.pickupDate} | ~TODO~ 12:30 ~asdasdasd~
+        </Text>
+        <Text style={pickupStyles.text}>{pickup.address.value}</Text>
+        <Text style={pickupStyles.text}>{pickup.code}</Text>
+        <TouchableOpacity onPress={() => dispatch(acceptPickup(pickup.id))}>
+          <Text>PRIVATI</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => dispatch(declinePickup(pickup.id))}>
+          <Text>KANCER</Text>
+        </TouchableOpacity>
       </View>
       <View style={pickupStyles.iconsContainer}>
         {pickup.status === 1 ? <Icons.Successful /> : <Icons.Pending />}
