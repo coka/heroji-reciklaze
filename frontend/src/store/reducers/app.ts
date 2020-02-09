@@ -1,7 +1,7 @@
-import { createReducer } from '.'
+import createReducerHelper from '../createReducerHelper'
 
 const initialState = {}
 
-export default createReducer(initialState, {
+export default createReducerHelper(initialState, {
   APP_START: state => state,
 })

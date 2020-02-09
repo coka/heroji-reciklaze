@@ -1,10 +1,9 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import logger from 'redux-logger'
+import createSagaMiddleware from 'redux-saga'
 import appReducer from './reducers/app'
 import authReducer from './reducers/auth'
-import createSagaMiddleware from 'redux-saga'
-import appSaga from './saga/app'
-import resourceSaga from './saga/resource'
-import logger from 'redux-logger'
+import * as sagas from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 const rootReducer = combineReducers({
@@ -20,5 +19,6 @@ const composedEnhancers = compose(applyMiddleware(...middlewares))
 
 export default createStore(rootReducer, {}, composedEnhancers)
 
-sagaMiddleware.run(appSaga)
-sagaMiddleware.run(resourceSaga)
+sagaMiddleware.run(sagas.appInitializationSaga)
+sagaMiddleware.run(sagas.resourceFetchingSaga)
+sagaMiddleware.run(sagas.loginSaga)

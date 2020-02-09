@@ -1,9 +1,11 @@
-import { createReducer } from '.'
+import createReducerHelper from '../createReducerHelper'
+
 const initialState = {
   token: '',
   loading: true,
 }
-export default createReducer(initialState, {
+
+export default createReducerHelper(initialState, {
   LOGIN: state => ({
     ...state,
     loading: true,

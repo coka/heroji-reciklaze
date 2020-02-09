@@ -1,19 +1,18 @@
+import { createSwitchNavigator } from '@react-navigation/compat'
 import { NavigationContainer } from '@react-navigation/native'
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack'
-import { createSwitchNavigator } from '@react-navigation/compat'
 import React, { useEffect } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import { useDispatch } from 'react-redux'
+import { StyleSheet, View } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 import LoggedInApplication from './screens/LoggedInApplication'
+import Login from './screens/Login'
+import Register from './screens/Register'
 import RegisterCollector from './screens/RegisterCollector'
 import RegisterProvider from './screens/RegisterProvider'
-import Register from './screens/Register'
-import Login from './screens/Login'
-import { appStart } from './store/actions/app'
-import { useSelector } from 'react-redux'
+import { appStart } from './store/actions'
 
 const navigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forScaleFromCenterAndroid,
