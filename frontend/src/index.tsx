@@ -4,7 +4,7 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
-import { StyleSheet, ActivityIndicator } from 'react-native'
+import { ActivityIndicator, StyleSheet } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import LoggedInApplication from './screens/LoggedInApplication'
 import Login from './screens/Login'
@@ -12,6 +12,7 @@ import Register from './screens/Register'
 import RegisterCollector from './screens/RegisterCollector'
 import RegisterProvider from './screens/RegisterProvider'
 import { appStart } from './store/actions/app'
+import { colors } from './StyleGuide'
 
 const navigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forScaleFromCenterAndroid,
@@ -28,7 +29,14 @@ export default () => {
   const isLoggedIn = token !== ''
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{
+        // @ts-ignore
+        colors: {
+          background: colors.background,
+        },
+      }}
+    >
       {appLoading ? (
         <ActivityIndicator />
       ) : isLoggedIn ? (
