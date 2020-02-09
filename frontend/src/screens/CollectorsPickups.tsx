@@ -27,7 +27,7 @@ const Pickups = ({ navigation }: PickupsProps) => {
     >
       <Header />
       <View style={styles.pickupListContainer}>
-        <PickupList pickups={pickups} />
+        <PickupList pickups={pickups.filter(pickup => pickup.status === 1)} />
       </View>
     </View>
   )

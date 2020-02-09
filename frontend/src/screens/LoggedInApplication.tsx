@@ -4,7 +4,9 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import PickupsStack from '../../navigation/PickupsStack'
 import About from './About'
 import Community from './Community'
-import Profile from './Profile'
+import ProfileScreen from './Profile'
+import { useSelector } from 'react-redux'
+import CollectorsPickups from '../screens/CollectorsPickups'
 
 const Tab = createBottomTabNavigator()
 
@@ -18,93 +20,185 @@ const shouldShowTabBar = (route: any): boolean => {
 }
 
 const LoggedInApplication = ({ navigation }) => {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        activeBackgroundColor: '#8dc63f',
-        inactiveBackgroundColor: '#8dc63f',
-      }}
-      backBehavior="initialRoute"
-    >
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: ({ focused }) => {
-            const opacity = focused ? 1 : 0.6
-            return (
-              <View style={[styles.tabLabel, { opacity }]}>
-                <Image
-                  style={styles.tabLabelIcon}
-                  resizeMode="contain"
-                  source={require('../../assets/user.png')}
-                />
-                <Text style={styles.tabLabelText}>PROFIL</Text>
-              </View>
-            )
-          },
+  const userType = useSelector(({ auth }) => auth.user.type)
+  if (userType === 2)
+    return (
+      // Provider
+      <Tab.Navigator
+        tabBarOptions={{
+          activeBackgroundColor: '#8dc63f',
+          inactiveBackgroundColor: '#8dc63f',
         }}
-      />
-      <Tab.Screen
-        name="Pickups"
-        component={PickupsStack}
-        options={({ route }) => ({
-          tabBarLabel: ({ focused }) => {
-            const opacity = focused ? 1 : 0.6
-            return (
-              <View style={[styles.tabLabel, { opacity }]}>
-                <Image
-                  style={styles.tabLabelIcon}
-                  resizeMode="contain"
-                  source={require('../../assets/pickup.png')}
-                />
-                <Text style={styles.tabLabelText}>PREUZIMANJA</Text>
-              </View>
-            )
-          },
-          tabBarVisible: shouldShowTabBar(route),
-        })}
-      />
-      <Tab.Screen
-        name="Community"
-        component={Community}
-        options={{
-          tabBarLabel: ({ focused }) => {
-            const opacity = focused ? 1 : 0.6
-            return (
-              <View style={[styles.tabLabel, { opacity }]}>
-                <Image
-                  style={styles.tabLabelIcon}
-                  resizeMode="contain"
-                  source={require('../../assets/community.png')}
-                />
-                <Text style={styles.tabLabelText}>ZAJEDNICA</Text>
-              </View>
-            )
-          },
+        backBehavior="initialRoute"
+      >
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/user.png')}
+                  />
+                  <Text style={styles.tabLabelText}>PROFIL</Text>
+                </View>
+              )
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Pickups"
+          component={PickupsStack}
+          options={({ route }) => ({
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/pickup.png')}
+                  />
+                  <Text style={styles.tabLabelText}>PREUZIMANJA</Text>
+                </View>
+              )
+            },
+            tabBarVisible: shouldShowTabBar(route),
+          })}
+        />
+        <Tab.Screen
+          name="Community"
+          component={Community}
+          options={{
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/community.png')}
+                  />
+                  <Text style={styles.tabLabelText}>ZAJEDNICA</Text>
+                </View>
+              )
+            },
+          }}
+        />
+        <Tab.Screen
+          name="About"
+          component={About}
+          options={{
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/shield.png')}
+                  />
+                  <Text style={styles.tabLabelText}>O APLIKACIJI</Text>
+                </View>
+              )
+            },
+          }}
+        />
+      </Tab.Navigator>
+    )
+  else
+    return (
+      // Collector
+      <Tab.Navigator
+        tabBarOptions={{
+          activeBackgroundColor: '#8dc63f',
+          inactiveBackgroundColor: '#8dc63f',
         }}
-      />
-      <Tab.Screen
-        name="About"
-        component={About}
-        options={{
-          tabBarLabel: ({ focused }) => {
-            const opacity = focused ? 1 : 0.6
-            return (
-              <View style={[styles.tabLabel, { opacity }]}>
-                <Image
-                  style={styles.tabLabelIcon}
-                  resizeMode="contain"
-                  source={require('../../assets/shield.png')}
-                />
-                <Text style={styles.tabLabelText}>O APLIKACIJI</Text>
-              </View>
-            )
-          },
-        }}
-      />
-    </Tab.Navigator>
-  )
+        backBehavior="initialRoute"
+      >
+        <Tab.Screen
+          name="CollectorsPickups"
+          component={CollectorsPickups}
+          options={({ route }) => ({
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/pickup.png')}
+                  />
+                  <Text style={styles.tabLabelText}>PREUZIMANJA</Text>
+                </View>
+              )
+            },
+            tabBarVisible: shouldShowTabBar(route),
+          })}
+        />
+        <Tab.Screen
+          name="Community"
+          component={Community}
+          options={{
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/community.png')}
+                  />
+                  <Text style={styles.tabLabelText}>ISTORIJA</Text>
+                </View>
+              )
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/user.png')}
+                  />
+                  <Text style={styles.tabLabelText}>PROFIL</Text>
+                </View>
+              )
+            },
+          }}
+        />
+        <Tab.Screen
+          name="About"
+          component={About}
+          options={{
+            tabBarLabel: ({ focused }) => {
+              const opacity = focused ? 1 : 0.6
+              return (
+                <View style={[styles.tabLabel, { opacity }]}>
+                  <Image
+                    style={styles.tabLabelIcon}
+                    resizeMode="contain"
+                    source={require('../../assets/shield.png')}
+                  />
+                  <Text style={styles.tabLabelText}>O APLIKACIJI</Text>
+                </View>
+              )
+            },
+          }}
+        />
+      </Tab.Navigator>
+    )
 }
 
 const styles = StyleSheet.create({

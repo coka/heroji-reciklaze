@@ -38,3 +38,8 @@ export const fetchUserFailure = error =>
     type: 'FETCH_USER_FAILURE',
     error,
   } as const)
+
+export const logOut = () =>
+  ({
+    type: 'LOG_OUT',
+  } as const)

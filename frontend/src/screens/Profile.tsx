@@ -9,78 +9,83 @@ import {
 } from 'react-native'
 import Headers from '../components/Headers'
 import { colors, fonts } from '../StyleGuide'
+import { useDispatch } from 'react-redux'
+import { logOut } from '../store/actions/auth'
 
-const Profile = () => (
-  <View style={styles.container}>
-    <Headers.Dark />
-    <ScrollView style={styles.content}>
-      <View style={styles.statistics}>
-        <Row>
-          <View>
-            <Row>
-              <Badge icon={icons.plastic} count={42} noMargin />
-              <Badge icon={icons.cardboard} count={42} />
-              <Badge icon={icons.glass} count={42} />
-            </Row>
-            <Row>
-              <Badge icon={icons.tin} count={42} noMargin />
-              <Badge icon={icons.all} count={42} />
-            </Row>
-          </View>
-          <View style={styles.total}>
-            <Text style={styles.totalLabel}>Ukupan{'\n'}broj akcija:</Text>
-            <Text style={styles.totalCount}>17</Text>
-          </View>
-        </Row>
-      </View>
-      <View style={styles.account}>
-        <View style={styles.accountDetails}>
-          <View>
-            <View style={styles.accountDetailsLine} />
-          </View>
-          <View style={styles.accountDetailsText}>
-            <Text
-              style={[
-                styles.text,
-                {
-                  textTransform: 'uppercase',
-                },
-              ]}
-            >
-              Ime korisnika
-            </Text>
-            <Text
-              style={[
-                styles.text,
-                {
-                  textTransform: 'uppercase',
-                },
-              ]}
-            >
-              Prezime korisnika
-            </Text>
-            <View style={styles.separator} />
-            <Text style={styles.text}>+381 64 123-45-67</Text>
-            <Text style={styles.text}>Laze Nančića 36</Text>
-            <Text style={styles.text}>email.adresa@gmail.com</Text>
-          </View>
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <View style={{ flex: 1 }} />
-          <TouchableOpacity
-            onPress={() => {
-              // TODO: Log out.
-            }}
-          >
-            <View style={{ paddingLeft: 10 }}>
-              <Text style={styles.text}>IZLOGUJ SE</Text>
+const Profile = () => {
+  const dispatch = useDispatch()
+  return (
+    <View style={styles.container}>
+      <Headers.Dark />
+      <ScrollView style={styles.content}>
+        <View style={styles.statistics}>
+          <Row>
+            <View>
+              <Row>
+                <Badge icon={icons.plastic} count={42} noMargin />
+                <Badge icon={icons.cardboard} count={42} />
+                <Badge icon={icons.glass} count={42} />
+              </Row>
+              <Row>
+                <Badge icon={icons.tin} count={42} noMargin />
+                <Badge icon={icons.all} count={42} />
+              </Row>
             </View>
-          </TouchableOpacity>
+            <View style={styles.total}>
+              <Text style={styles.totalLabel}>Ukupan{'\n'}broj akcija:</Text>
+              <Text style={styles.totalCount}>17</Text>
+            </View>
+          </Row>
         </View>
-      </View>
-    </ScrollView>
-  </View>
-)
+        <View style={styles.account}>
+          <View style={styles.accountDetails}>
+            <View>
+              <View style={styles.accountDetailsLine} />
+            </View>
+            <View style={styles.accountDetailsText}>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    textTransform: 'uppercase',
+                  },
+                ]}
+              >
+                Ime korisnika
+              </Text>
+              <Text
+                style={[
+                  styles.text,
+                  {
+                    textTransform: 'uppercase',
+                  },
+                ]}
+              >
+                Prezime korisnika
+              </Text>
+              <View style={styles.separator} />
+              <Text style={styles.text}>+381 64 123-45-67</Text>
+              <Text style={styles.text}>Laze Nančića 36</Text>
+              <Text style={styles.text}>email.adresa@gmail.com</Text>
+            </View>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flex: 1 }} />
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(logOut())
+              }}
+            >
+              <View style={{ paddingLeft: 10 }}>
+                <Text style={styles.text}>IZLOGUJ SE</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  )
+}
 
 const icons = {
   plastic: require(`../../assets/plastic.png`),

@@ -8,11 +8,11 @@ interface PickupListProps {
   pickups: Array<Pickup>
 }
 
-const PickupList = ({ pickups }: PickupListProps) => (
+const PickupList = ({ pickups = [] }: PickupListProps) => (
   <FlatList
     data={pickups}
     keyExtractor={pickup => pickup.id}
-    renderItem={({ item }) => <CollectorsPickup pickup={item} />}
+    renderItem={({ item }) => <Pickup pickup={item} />}
     ItemSeparatorComponent={Separator}
   />
 )
@@ -22,6 +22,7 @@ interface PickupProps {
 }
 
 const Pickup = ({ pickup }: PickupProps) => {
+  const dispatch = useDispatch()
   return (
     <View style={pickupStyles.container}>
       <View>
@@ -30,32 +31,24 @@ const Pickup = ({ pickup }: PickupProps) => {
         </Text>
         <Text style={pickupStyles.text}>{pickup.address.value}</Text>
         <Text style={pickupStyles.text}>{pickup.code}</Text>
-      </View>
-      <View style={pickupStyles.iconsContainer}>
-        {pickup.status === 1 ? <Icons.Successful /> : <Icons.Pending />}
-        <Icons.Edit />
-        <Icons.Cancel />
-      </View>
-    </View>
-  )
-}
-
-const CollectorsPickup = ({ pickup }: PickupProps) => {
-  const dispatch = useDispatch()
-  return (
-    <View style={pickupStyles.container}>
-      <View>
-        <Text style={pickupStyles.text}>
-          {pickup.pickupDate} | ~TODO~ 12:30 ~asdasdasd~
-        </Text>
-        <Text style={pickupStyles.text}>{pickup.address.value}</Text>
-        <Text style={pickupStyles.text}>{pickup.code}</Text>
-        <TouchableOpacity onPress={() => dispatch(acceptPickup(pickup.id))}>
-          <Text>PRIVATI</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => dispatch(declinePickup(pickup.id))}>
-          <Text>KANCER</Text>
-        </TouchableOpacity>
+        {pickup.status === 1 && (
+          <View style={pickupStyles.buttonsRowContainer}>
+            <View style={pickupStyles.buttonsRow}>
+              <TouchableOpacity
+                onPress={() => dispatch(acceptPickup(pickup.id))}
+                style={pickupStyles.buttonAccept}
+              >
+                <Text style={pickupStyles.buttonText}>PRIHVATI</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => dispatch(declinePickup(pickup.id))}
+                style={pickupStyles.buttonCancel}
+              >
+                <Text style={pickupStyles.buttonText}>ODBIJ</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
       </View>
       <View style={pickupStyles.iconsContainer}>
         {pickup.status === 1 ? <Icons.Successful /> : <Icons.Pending />}
@@ -80,6 +73,31 @@ const pickupStyles = StyleSheet.create({
     fontFamily: 'lato',
     fontSize: 14,
     lineHeight: 18,
+  },
+  buttonsRowContainer: {
+    flexDirection: 'row',
+    alignSelf: 'stretch',
+  },
+  buttonsRow: {
+    flexDirection: 'row',
+  },
+  buttonAccept: {
+    flex: 1,
+    backgroundColor: '#8DC63F',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
+  buttonCancel: {
+    height: 35,
+    flex: 1,
+    backgroundColor: '#F53838',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
   },
 })
 

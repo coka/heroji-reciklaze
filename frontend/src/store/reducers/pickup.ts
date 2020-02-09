@@ -30,4 +30,22 @@ export default createReducer(initialState, {
     ...state,
     error,
   }),
+  ACCEPT_PICKUP: (state, { id }) => {
+    const pickups = [...state.pickups]
+    pickups.find(pickup => pickup.id === id).status = 2
+
+    return {
+      ...state,
+      pickups,
+    }
+  },
+  DECLINE_PICKUP: (state, { id }) => {
+    const pickups = [...state.pickups]
+    pickups.filter(pickup => pickup.id !== id)
+
+    return {
+      ...state,
+      pickups,
+    }
+  },
 })

@@ -4,7 +4,7 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, ActivityIndicator } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import LoggedInApplication from './screens/LoggedInApplication'
 import Login from './screens/Login'
@@ -18,6 +18,7 @@ const navigationOptions = {
 }
 
 export default () => {
+  const appLoading = useSelector(({ app }) => app.loading)
   const token = useSelector(state => state.auth.token)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -28,7 +29,13 @@ export default () => {
 
   return (
     <NavigationContainer>
-      {isLoggedIn ? <MainStack /> : <AuthStack />}
+      {appLoading ? (
+        <ActivityIndicator />
+      ) : isLoggedIn ? (
+        <MainStack />
+      ) : (
+        <AuthStack />
+      )}
     </NavigationContainer>
   )
 }
