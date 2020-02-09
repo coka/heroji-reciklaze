@@ -8,8 +8,12 @@ const Headers = {
     const insets = useSafeArea()
 
     return (
-      <View style={[styles.container, { paddingTop: insets.top + 10 }]}>
-        <Image source={require('../../assets/logo-green.png')} />
+      <View style={[styles.darkContainer, { paddingTop: insets.top + 15 }]}>
+        <Image
+          style={{ height: 50 }}
+          resizeMode="contain"
+          source={require('../../assets/logo-green.png')}
+        />
       </View>
     )
   },
@@ -30,6 +34,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     borderBottomLeftRadius: 50,
     paddingBottom: 28,
+  },
+  darkContainer: {
+    alignItems: 'center',
+    backgroundColor: '#333333',
+    borderBottomLeftRadius: 50,
+    paddingBottom: 32,
   },
 })
 

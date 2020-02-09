@@ -9,13 +9,29 @@ interface InputProps extends TextInputProps {
 
 const Input = (props: InputProps) => (
   <View>
-    <Text style={styles.label}>{props.label}</Text>
+    <Text style={[styles.label]}>{props.label}</Text>
     <TextInput style={styles.input} selectionColor={colors.white} {...props} />
     <View style={styles.underline} />
   </View>
 )
 
+export const DarkInput = (props: InputProps) => (
+  <View>
+    <Text style={[styles.label, { color: '#333333' }]}>{props.label}</Text>
+    <TextInput
+      style={[styles.input, { color: '#333333' }]}
+      selectionColor="#666666"
+      {...props}
+    />
+    <View style={styles.darkUnderline} />
+  </View>
+)
+
 const styles = StyleSheet.create({
+  darkUnderline: {
+    backgroundColor: '#666666',
+    height: 1,
+  },
   input: {
     color: colors.white,
     fontFamily: fonts.regular,
