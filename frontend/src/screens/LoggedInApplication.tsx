@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import PickupsStack from '../../navigation/PickupsStack'
 import About from './About'
 import Community from './Community'
+import Profile from './Profile'
 
 const Tab = createBottomTabNavigator()
 
@@ -16,12 +17,6 @@ const shouldShowTabBar = (route: any): boolean => {
   return routeNames[index] !== 'NewPickup'
 }
 
-const ProfileScreen = () => (
-  <View style={styles.container}>
-    <Text>PROFILE</Text>
-  </View>
-)
-
 const LoggedInApplication = ({ navigation }) => {
   return (
     <Tab.Navigator
@@ -33,7 +28,7 @@ const LoggedInApplication = ({ navigation }) => {
     >
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={Profile}
         options={{
           tabBarLabel: ({ focused }) => {
             const opacity = focused ? 1 : 0.6
