@@ -3,13 +3,15 @@ import createReducer from '../createReducerHelper'
 interface AuthState {
   token: string
   loading: boolean
-  error: object
+  error: Error
+  user: object
 }
 
 const initialState = {
   token: '',
   loading: true,
   error: null,
+  user: {},
 }
 
 export default createReducer(initialState, {
@@ -22,11 +24,12 @@ export default createReducer(initialState, {
       ...state,
       loading: true,
     } as const),
-  LOG_IN_SUCCESS: (state, { token }) =>
+  LOG_IN_SUCCESS: (state, { token, user }) =>
     ({
       ...state,
       loading: false,
       token,
+      user,
     } as const),
   LOG_IN_FAILURE: (state, { error }) =>
     ({
@@ -47,4 +50,8 @@ export default createReducer(initialState, {
       ...state,
       error,
     } as const),
+  FETCH_USER_SUCCESS: (state, { user }) => ({
+    ...state,
+    user,
+  }),
 })

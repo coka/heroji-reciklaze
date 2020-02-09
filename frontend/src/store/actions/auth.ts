@@ -26,3 +26,15 @@ export const fetchUser = () =>
   ({
     type: 'FETCH_USER',
   } as const)
+
+export const fetchUserSuccess = user =>
+  ({
+    type: 'FETCH_USER_SUCCESS',
+    user,
+  } as const)
+
+export const fetchUserFailure = error =>
+  ({
+    type: 'FETCH_USER_FAILURE',
+    error,
+  } as const)

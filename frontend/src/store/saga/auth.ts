@@ -1,5 +1,10 @@
 import { takeLatest, put, all, select } from 'redux-saga/effects'
-import { logInSuccess, logInFailure } from '../actions/auth'
+import {
+  logInSuccess,
+  logInFailure,
+  fetchUserSuccess,
+  fetchUserFailure,
+} from '../actions/auth'
 import { fetchPickups } from '../actions/pickup'
 import { post, authorizedGet } from '../api'
 import { AsyncStorage } from 'react-native'
@@ -34,14 +39,11 @@ function* registerProvider(payload: {}) {
 function* fetchUser() {
   try {
     const token = yield select(selectToken)
-    const response = yield authorizedGet('/user', token)
-    console.log(
-      '%c!DEBUG!%c response: %o',
-      'background-color:#f80;',
-      '',
-      response
-    )
-  } catch (error) {}
+    const user = yield authorizedGet('/user', token)
+    yield put(fetchUserSuccess(user))
+  } catch (error) {
+    yield put(fetchUserFailure(error))
+  }
 }
 
 export default function* authSaga() {

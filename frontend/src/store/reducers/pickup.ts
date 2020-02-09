@@ -7,9 +7,13 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-  FETCH_PICKUPS: state =>
-    ({
-      ...state,
-      loading: true,
-    } as const),
+  FETCH_PICKUPS: state => ({
+    ...state,
+    loading: true,
+  }),
+  FETCH_PICKUPS_SUCCESS: (state, { pickups }) => ({
+    ...state,
+    pickups,
+    loading: false,
+  }),
 })

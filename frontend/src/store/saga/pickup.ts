@@ -3,12 +3,13 @@ import { authorizedGet } from '../api'
 
 const getToken = ({ auth }) => auth.token
 
-function* pickupRetrieval() {
+function* fetchPickups() {
   const token = yield select(getToken)
   const { pickups } = yield authorizedGet('/pickup', token)
+
   yield put({ type: 'FETCH_PICKUPS_SUCCESS', pickups })
 }
 
 export default function* pickupSaga() {
-  yield all([takeLatest('FETCH_PICKUPS', pickupRetrieval)])
+  yield all([takeLatest('FETCH_PICKUPS', fetchPickups)])
 }

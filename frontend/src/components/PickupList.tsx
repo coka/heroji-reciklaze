@@ -9,7 +9,7 @@ const PickupList = ({ pickups }: PickupListProps) => (
   <FlatList
     data={pickups}
     keyExtractor={pickup => pickup.id}
-    renderItem={({ item: pickup }) => <Pickup pickup={pickup} />}
+    renderItem={({ item }) => <Pickup pickup={item} />}
     ItemSeparatorComponent={Separator}
   />
 )

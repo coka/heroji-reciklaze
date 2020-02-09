@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import GreenButton from '../components/GreenButton'
 import Header from '../components/Header'
 import PickupList from '../components/PickupList'
+import { fetchPickups } from '../store/actions/pickup'
 
 interface PickupsProps {
   navigation: any
 }
 
 const Pickups = ({ navigation }: PickupsProps) => {
-  const pickups = useSelector(state => state.app.pickups)
+  const pickups = useSelector(({ pickup }) => pickup.pickups)
   const insets = useSafeArea()
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchPickups())
+  }, [])
 
   return (
     <View

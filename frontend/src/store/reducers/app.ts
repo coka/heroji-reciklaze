@@ -1,16 +1,7 @@
 import createReducer from '../createReducerHelper'
 
-interface AppState {
-  pickups: Array<{}>
-}
+interface AppState {}
 
-const initialState: AppState = {
-  pickups: [],
-}
+const initialState: AppState = {}
 
-export default createReducer(initialState, {
-  FETCH_PICKUPS_SUCCESS: (state, { pickups }) => ({
-    ...state,
-    pickups,
-  }),
-})
+export default createReducer(initialState, {})

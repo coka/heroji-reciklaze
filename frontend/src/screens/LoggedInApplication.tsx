@@ -23,14 +23,6 @@ const ProfileScreen = () => (
 )
 
 const LoggedInApplication = ({ navigation }) => {
-  useEffect(() => {
-    console.log(
-      '%c!DEBUG!%c navigation: %o',
-      'background-color:#f80;',
-      '',
-      navigation
-    )
-  }, [])
   return (
     <Tab.Navigator
       tabBarOptions={{

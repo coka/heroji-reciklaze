@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native'
 
-const ResourceSelector = () => {
+const ResourceSelector = ({ sendResources }) => {
   const [plastic, setPlastic] = useState(false)
   const [cardboard, setCardboard] = useState(false)
   const [glass, setGlass] = useState(false)
@@ -17,6 +17,16 @@ const ResourceSelector = () => {
       setters.forEach(setter => setter(false))
     }
   }
+
+  useEffect(() => {
+    const resources = []
+    if (plastic) resources.push('1')
+    if (cardboard) resources.push('2')
+    if (glass) resources.push('3')
+    if (tin) resources.push('4')
+    sendResources(resources)
+  }, [plastic, cardboard, glass, tin])
+
   return (
     <View>
       <View
