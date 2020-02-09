@@ -1,0 +1,3 @@
+interface Address {
+  value: string
+}

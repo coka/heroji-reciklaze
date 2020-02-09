@@ -3,9 +3,11 @@
 /******************************************************************************/
 
 import { Alert } from 'react-native'
-import { put, takeEvery, takeLatest } from 'redux-saga/effects'
+import { put, select, takeEvery, takeLatest } from 'redux-saga/effects'
 import { appStartFailure, appStartSuccess, fetchResources } from './actions'
-import { get, post } from './api'
+import { authorizedGet, get, post } from './api'
+
+const getToken = state => state.auth.token
 
 export function* appInitializationSaga() {
   yield takeLatest('APP_START', function* appInitialization() {
@@ -16,6 +18,14 @@ export function* appInitializationSaga() {
       Alert.alert('Greška', 'Desila se greška prilikom pokretanja aplikacije.')
       yield put(appStartFailure(error))
     }
+  })
+}
+
+export function* pickupRetrievalSaga() {
+  yield takeLatest('FETCH_PICKUPS', function* pickupRetrieval() {
+    const token = yield select(getToken)
+    const { pickups } = yield authorizedGet('/pickup', token)
+    yield put({ type: 'FETCH_PICKUPS_SUCCESS', pickups })
   })
 }
 
@@ -40,6 +50,7 @@ export function* loginSaga() {
     const token = response?.session?.sessionId
     if (token) {
       yield put({ type: 'LOGIN_SUCCESS', token })
+      yield put({ type: 'FETCH_PICKUPS' })
     }
   })
 }

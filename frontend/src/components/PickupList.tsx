@@ -1,34 +1,35 @@
 import React from 'react'
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
 
-const mockPickupData = new Array(9)
+interface PickupListProps {
+  pickups: Array<Pickup>
+}
 
-const PickupList = () => (
+const PickupList = ({ pickups }: PickupListProps) => (
   <FlatList
-    data={mockPickupData}
-    keyExtractor={(_, index) => index.toString()}
-    renderItem={({ index }) => {
-      const state: PickupState = index % 2 === 0 ? 'SUCCESSFUL' : 'PENDING'
-      return <Pickup state={state} />
-    }}
+    data={pickups}
+    keyExtractor={pickup => pickup.id}
+    renderItem={({ item: pickup }) => <Pickup pickup={pickup} />}
     ItemSeparatorComponent={Separator}
   />
 )
 
 interface PickupProps {
-  state: PickupState
+  pickup: Pickup
 }
 
-type PickupState = 'PENDING' | 'SUCCESSFUL'
-
-const Pickup = ({ state }: PickupProps) => {
+const Pickup = ({ pickup }: PickupProps) => {
   return (
     <View style={pickupStyles.container}>
       <View>
-        <Text style={pickupStyles.text}>07 - 02 - 2020 | 12:30</Text>
+        <Text style={pickupStyles.text}>
+          {pickup.pickupDate} | ~TODO~ 12:30 ~TODO~
+        </Text>
+        <Text style={pickupStyles.text}>{pickup.address.value}</Text>
+        <Text style={pickupStyles.text}>{pickup.code}</Text>
       </View>
       <View style={pickupStyles.iconsContainer}>
-        {state === 'SUCCESSFUL' ? <Icons.Successful /> : <Icons.Pending />}
+        {pickup.status === 1 ? <Icons.Successful /> : <Icons.Pending />}
         <Icons.Edit />
         <Icons.Cancel />
       </View>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useSafeArea } from 'react-native-safe-area-context'
+import { useSelector } from 'react-redux'
 import GreenButton from '../components/GreenButton'
 import Header from '../components/Header'
 import PickupList from '../components/PickupList'
@@ -10,6 +11,7 @@ interface PickupsProps {
 }
 
 const Pickups = ({ navigation }: PickupsProps) => {
+  const pickups = useSelector(state => state.app.pickups)
   const insets = useSafeArea()
 
   return (
@@ -29,7 +31,7 @@ const Pickups = ({ navigation }: PickupsProps) => {
         />
       </View>
       <View style={styles.pickupListContainer}>
-        <PickupList />
+        <PickupList pickups={pickups} />
       </View>
     </View>
   )

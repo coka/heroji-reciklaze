@@ -20,5 +20,6 @@ const composedEnhancers = compose(applyMiddleware(...middlewares))
 export default createStore(rootReducer, {}, composedEnhancers)
 
 sagaMiddleware.run(sagas.appInitializationSaga)
+sagaMiddleware.run(sagas.pickupRetrievalSaga)
 sagaMiddleware.run(sagas.resourceFetchingSaga)
 sagaMiddleware.run(sagas.loginSaga)
