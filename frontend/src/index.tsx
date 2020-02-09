@@ -11,7 +11,7 @@ import Login from './screens/Login'
 import Register from './screens/Register'
 import RegisterCollector from './screens/RegisterCollector'
 import RegisterProvider from './screens/RegisterProvider'
-import { appStart } from './store/actions'
+import { appStart } from './store/actions/app'
 
 const navigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forScaleFromCenterAndroid,
@@ -31,15 +31,6 @@ export default () => {
       {isLoggedIn ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   )
-}
-
-const SplashScreen = ({ navigation }) => {
-  const token = useSelector(state => state.auth.token)
-
-  useEffect(() => {
-    navigation.navigate(token === '' ? 'AuthStack' : 'MainStack')
-  }, [])
-  return <View />
 }
 
 const MainStack = () => {

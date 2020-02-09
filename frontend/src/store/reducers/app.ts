@@ -1,14 +1,14 @@
-import createReducerHelper from '../createReducerHelper'
+import createReducer from '../createReducerHelper'
 
 interface AppState {
-  pickups: Array<Pickup>
+  pickups: Array<{}>
 }
 
 const initialState: AppState = {
   pickups: [],
 }
 
-export default createReducerHelper(initialState, {
+export default createReducer(initialState, {
   FETCH_PICKUPS_SUCCESS: (state, { pickups }) => ({
     ...state,
     pickups,

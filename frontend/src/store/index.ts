@@ -3,12 +3,17 @@ import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import appReducer from './reducers/app'
 import authReducer from './reducers/auth'
-import * as sagas from './sagas'
+import pickupReducer from './reducers/pickup'
+import appSaga from './saga/app'
+import authSaga from './saga/auth'
+import pickupSaga from './saga/pickup'
 
 const sagaMiddleware = createSagaMiddleware()
+
 const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer,
+  pickup: pickupReducer,
 })
 
 const middlewares = [sagaMiddleware]
@@ -19,7 +24,6 @@ const composedEnhancers = compose(applyMiddleware(...middlewares))
 
 export default createStore(rootReducer, {}, composedEnhancers)
 
-sagaMiddleware.run(sagas.appInitializationSaga)
-sagaMiddleware.run(sagas.pickupRetrievalSaga)
-sagaMiddleware.run(sagas.resourceFetchingSaga)
-sagaMiddleware.run(sagas.loginSaga)
+sagaMiddleware.run(appSaga)
+sagaMiddleware.run(authSaga)
+sagaMiddleware.run(pickupSaga)

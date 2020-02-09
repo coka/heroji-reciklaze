@@ -12,6 +12,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import Headers from '../components/Headers'
 import { DarkInput as Input } from '../components/Input'
 import { colors } from '../StyleGuide'
+import { useDispatch } from 'react-redux'
+import { registerProvider } from '../store/actions/auth'
 
 const Separator = () => <View style={{ height: 15 }} />
 
@@ -24,6 +26,7 @@ const RegisterProvider = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [passConfirm, setPassConfirm] = useState('')
 
+  const dispatch = useDispatch()
   const isFocused = useIsFocused()
   useFocusEffect(
     useCallback(() => {
@@ -77,7 +80,7 @@ const RegisterProvider = ({ navigation }) => {
           <Separator />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('MainStack')}
+            onPress={() => dispatch(registerProvider())}
           >
             <Text style={styles.buttonText}>KERIRAJ NALOG</Text>
           </TouchableOpacity>
