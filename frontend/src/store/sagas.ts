@@ -32,10 +32,14 @@ export function* resourceFetchingSaga() {
 }
 
 export function* loginSaga() {
-  yield takeEvery('LOG_IN', function* logIn(action) {
+  yield takeEvery('LOG_IN', function* logIn({ email, password }: any) {
     const response = yield post('/user/login', {
-      email: 'nikdiklic@gmail.com',
-      password: 'password',
+      email,
+      password,
     })
+    const token = response?.session?.sessionId
+    if (token) {
+      yield put({ type: 'LOGIN_SUCCESS', token })
+    }
   })
 }

@@ -1,4 +1,3 @@
-import { createSwitchNavigator } from '@react-navigation/compat'
 import { NavigationContainer } from '@react-navigation/native'
 import {
   CardStyleInterpolators,
@@ -19,24 +18,23 @@ const navigationOptions = {
 }
 
 export default () => {
+  const token = useSelector(state => state.auth.token)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(appStart())
   }, [])
 
-  const Switch = createSwitchNavigator(
-    { SplashScreen, AuthStack, MainStack },
-    {}
-  )
+  const isLoggedIn = token !== ''
+
   return (
     <NavigationContainer>
-      <Switch />
+      {isLoggedIn ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   )
 }
 
 const SplashScreen = ({ navigation }) => {
-  const token = useSelector(({ auth }) => auth.token)
+  const token = useSelector(state => state.auth.token)
 
   useEffect(() => {
     navigation.navigate(token === '' ? 'AuthStack' : 'MainStack')
