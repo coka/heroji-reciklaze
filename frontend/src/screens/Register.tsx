@@ -1,76 +1,59 @@
 import React from 'react'
-import { View, Text, ImageBackground, StyleSheet, Image } from 'react-native'
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import Headers from '../components/Headers'
+import { colors, fonts } from '../StyleGuide'
 
 const Register = ({ navigation }) => {
   return (
-    <View>
-      <ImageBackground
-        style={styles.imageBackground}
-        source={require('../../assets/background.png')}
-        resizeMode="cover"
-      >
-        <Image
-          source={require('../../assets/logo-white.png')}
-          style={styles.logoWhite}
-          resizeMode="contain"
-        />
+    <ImageBackground
+      source={require('../../assets/background.png')}
+      style={styles.imageBackground}
+    >
+      <Headers.Light />
+      <View style={styles.content}>
         <TouchableOpacity
-          style={styles.touchIcon}
           onPress={() => navigation.navigate('RegisterProvider')}
         >
-          <View
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 50,
-              borderWidth: 5,
-              borderColor: 'white',
-            }}
-          />
-          <Text style={styles.text}>SNABDEVAČ</Text>
+          <>
+            <Image source={require('../../assets/provider.png')} />
+            <Text style={styles.text}>SNABDEVAČ</Text>
+          </>
         </TouchableOpacity>
+        <View style={styles.separator} />
         <TouchableOpacity
-          style={styles.touchIcon}
           onPress={() => navigation.navigate('RegisterCollector')}
         >
-          <View
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 50,
-              borderWidth: 5,
-              borderColor: 'white',
-            }}
-          />
-          <Text style={styles.text}>SAKUPLJAČ</Text>
+          <>
+            <Image source={require('../../assets/collector.png')} />
+            <Text style={styles.text}>SAKUPLJAČ</Text>
+          </>
         </TouchableOpacity>
-      </ImageBackground>
-    </View>
+      </View>
+    </ImageBackground>
   )
 }
 
 const styles = StyleSheet.create({
+  content: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
   imageBackground: {
     width: '100%',
     height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  touchIcon: {
-    margin: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+  separator: {
+    height: 70,
   },
   text: {
-    fontFamily: 'oswald',
-    color: 'white',
-    fontSize: 24,
-  },
-  logoWhite: {
-    height: 85,
-    width: 240,
-    marginVertical: 30,
+    color: colors.white,
+    fontFamily: fonts.oswald,
+    fontSize: 21,
+    lineHeight: 27,
+    marginTop: 20,
+    textAlign: 'center',
   },
 })
 export default Register
