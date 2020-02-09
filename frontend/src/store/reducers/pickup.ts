@@ -48,4 +48,5 @@ export default createReducer(initialState, {
       pickups,
     }
   },
+  LOG_OUT: () => initialState,
 })
