@@ -150,8 +150,14 @@ const LoggedInApplication = ({ navigation }) => {
     // Collector
     <Tab.Navigator
       tabBarOptions={{
-        activeBackgroundColor: '#8dc63f',
-        inactiveBackgroundColor: '#8dc63f',
+        style: {
+          backgroundColor: '#fbf7eb',
+          borderTopWidth: 0,
+          shadowColor: '#000000',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 8,
+        },
       }}
       backBehavior="initialRoute"
     >
@@ -161,14 +167,20 @@ const LoggedInApplication = ({ navigation }) => {
         options={({ route }) => ({
           tabBarLabel: ({ focused }) => {
             const opacity = focused ? 1 : 0.6
+            const color = focused ? colors.green : '#333333'
+            const icon = focused
+              ? require('../../assets/pickups.png')
+              : require('../../assets/pickups-inactive.png')
             return (
-              <View style={[styles.tabLabel, { opacity }]}>
+              <View style={styles.tabLabel}>
                 <Image
                   style={styles.tabLabelIcon}
                   resizeMode="contain"
-                  source={require('../../assets/pickup.png')}
+                  source={icon}
                 />
-                <Text style={styles.tabLabelText}>PREUZIMANJA</Text>
+                <Text style={[styles.tabLabelText, { color, opacity }]}>
+                  PREUZIMANJA
+                </Text>
               </View>
             )
           },
@@ -178,59 +190,80 @@ const LoggedInApplication = ({ navigation }) => {
       <Tab.Screen
         name="Community"
         component={Community}
-        options={{
+        options={({ route }) => ({
           tabBarLabel: ({ focused }) => {
             const opacity = focused ? 1 : 0.6
+            const color = focused ? colors.green : '#333333'
+            const icon = focused
+              ? require('../../assets/history.png')
+              : require('../../assets/history-inactive.png')
             return (
-              <View style={[styles.tabLabel, { opacity }]}>
+              <View style={styles.tabLabel}>
                 <Image
                   style={styles.tabLabelIcon}
                   resizeMode="contain"
-                  source={require('../../assets/community.png')}
+                  source={icon}
                 />
-                <Text style={styles.tabLabelText}>ISTORIJA</Text>
+                <Text style={[styles.tabLabelText, { color, opacity }]}>
+                  ISTORIJA
+                </Text>
               </View>
             )
           },
-        }}
+          tabBarVisible: shouldShowTabBar(route),
+        })}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{
+        options={({ route }) => ({
           tabBarLabel: ({ focused }) => {
             const opacity = focused ? 1 : 0.6
+            const color = focused ? colors.green : '#333333'
+            const icon = focused
+              ? require('../../assets/profile.png')
+              : require('../../assets/profile-inactive.png')
             return (
-              <View style={[styles.tabLabel, { opacity }]}>
+              <View style={styles.tabLabel}>
                 <Image
                   style={styles.tabLabelIcon}
                   resizeMode="contain"
-                  source={require('../../assets/user.png')}
+                  source={icon}
                 />
-                <Text style={styles.tabLabelText}>PROFIL</Text>
+                <Text style={[styles.tabLabelText, { color, opacity }]}>
+                  PROFIL
+                </Text>
               </View>
             )
           },
-        }}
+          tabBarVisible: shouldShowTabBar(route),
+        })}
       />
       <Tab.Screen
         name="About"
         component={About}
-        options={{
+        options={({ route }) => ({
           tabBarLabel: ({ focused }) => {
             const opacity = focused ? 1 : 0.6
+            const color = focused ? colors.green : '#333333'
+            const icon = focused
+              ? require('../../assets/about.png')
+              : require('../../assets/about-inactive.png')
             return (
-              <View style={[styles.tabLabel, { opacity }]}>
+              <View style={styles.tabLabel}>
                 <Image
                   style={styles.tabLabelIcon}
                   resizeMode="contain"
-                  source={require('../../assets/shield.png')}
+                  source={icon}
                 />
-                <Text style={styles.tabLabelText}>O APLIKACIJI</Text>
+                <Text style={[styles.tabLabelText, { color, opacity }]}>
+                  O APLIKACIJI
+                </Text>
               </View>
             )
           },
-        }}
+          tabBarVisible: shouldShowTabBar(route),
+        })}
       />
     </Tab.Navigator>
   )
