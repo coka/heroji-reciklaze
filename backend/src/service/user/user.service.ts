@@ -39,6 +39,7 @@ export class UserService {
       throw new CustomError(ERROR_MESSAGES.USER.NOT_EXIST);
     }
     const session = await this.sessionService.createSession(existingUser.id);
+    delete existingUser.password;
     return { user: existingUser, session };
   }
 

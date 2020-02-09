@@ -10,7 +10,7 @@ const connection = typeorm.createConnection({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
   entities: MODELS,
-  synchronize: true,
+  synchronize: false,
   logging: false
 });
 

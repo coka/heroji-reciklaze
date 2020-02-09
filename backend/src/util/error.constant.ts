@@ -55,6 +55,16 @@ export const ERROR_MESSAGES = {
     ALREADY_MATCHED: {
       code: 409,
       message: 'Pickup already matched'
+    },
+    NO_AVALIABLE_COLLECTORS: {
+      code: 409,
+      message: 'No avaliable collectors at this time'
+    }
+  },
+  INVITATION: {
+    NOT_FOUND: {
+      code: 404,
+      message: 'Invitation not found'
     }
   }
 };

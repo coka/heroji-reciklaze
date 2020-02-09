@@ -22,4 +22,9 @@ export class CustomRepository<Model> {
   async findById(id: string) {
     return (await getConnection()).getRepository(this.entity).findOne(id);
   }
+
+  @TryCatch()
+  async deleteById(entity: Model) {
+    return (await getConnection()).getRepository(this.entity).remove(entity);
+  }
 }

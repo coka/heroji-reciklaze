@@ -29,11 +29,31 @@ putPickup:
           name: authorizer
 
 deletePickup:
-  handler: src/handler/pickup/pickup.getdelete
+  handler: src/handler/pickup/pickup.remove
   events:
     - http:
-        path: api/pickup
+        path: api/pickup/{id}
         method: delete
+        cors: true
+        authorizer:
+          name: authorizer
+
+acceptPickup:
+  handler: src/handler/pickup/pickup.accept
+  events:
+    - http:
+        path: api/pickup/accept/{id}
+        method: get
+        cors: true
+        authorizer:
+          name: authorizer
+
+declinePickup:
+  handler: src/handler/pickup/pickup.decline
+  events:
+    - http:
+        path: api/pickup/decline/{id}
+        method: get
         cors: true
         authorizer:
           name: authorizer

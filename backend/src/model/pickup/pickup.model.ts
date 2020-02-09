@@ -19,7 +19,7 @@ export class PickupModel extends SharedModel {
   @Column({ type: 'varchar', nullable: true })
   collectorId: string;
 
-  @Column({ type: 'date', nullable: false })
+  @Column({ type: 'datetime', nullable: false })
   pickupDate: Date;
 
   @Column({ type: 'varchar', nullable: false })

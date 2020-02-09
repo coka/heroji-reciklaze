@@ -37,3 +37,15 @@ logout:
           name: authorizer
           identitySource: method.request.header.Authorization
           resultTtlInSeconds: 0
+
+get:
+  handler: src/handler/user/user.get
+  events:
+    - http:
+        path: api/user/
+        method: get
+        cors: true
+        authorizer:
+          name: authorizer
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
