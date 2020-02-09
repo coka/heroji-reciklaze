@@ -18,9 +18,10 @@ export const logInFailure = (error: Error) =>
     error,
   } as const)
 
-export const registerProvider = () =>
+export const register = payload =>
   ({
-    type: 'REGISTER_PROVIDER',
+    type: 'REGISTER',
+    payload,
   } as const)
 
 export const fetchUser = () =>

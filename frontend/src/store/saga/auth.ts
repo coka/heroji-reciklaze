@@ -31,7 +31,7 @@ function* logIn({ email, password }: any) {
   }
 }
 
-function* registerProvider(payload: {}) {
+function* register(payload: {}) {
   try {
     const response = yield post('/user/register', payload)
   } catch (error) {}
@@ -56,7 +56,7 @@ export default function* authSaga() {
   yield all([
     takeLatest('LOG_IN', logIn),
     takeLatest('LOG_OUT', logOut),
-    takeLatest('REGISTER_PROVIDER', registerProvider),
+    takeLatest('REGISTER', register),
     takeLatest('FETCH_USER', fetchUser),
   ])
 }

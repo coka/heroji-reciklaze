@@ -13,14 +13,14 @@ import Headers from '../components/Headers'
 import { DarkInput as Input } from '../components/Input'
 import { colors } from '../StyleGuide'
 import { useDispatch } from 'react-redux'
-import { registerProvider } from '../store/actions/auth'
+import { register } from '../store/actions/auth'
 
 const Separator = () => <View style={{ height: 15 }} />
 
 const RegisterProvider = ({ navigation }) => {
-  const [ime, setIme] = useState('')
-  const [prezime, setPrezime] = useState('')
-  const [address, setAddress] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [addressValue, setAddress] = useState('')
   const [telephone, setTelephone] = useState('+381')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -45,9 +45,9 @@ const RegisterProvider = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <Headers.Dark />
         <View style={styles.padded}>
-          <Input label="Ime" value={ime} onChangeText={setIme} />
+          <Input label="Ime" value={firstName} onChangeText={setFirstName} />
           <Separator />
-          <Input label="Prezime" value={prezime} onChangeText={setPrezime} />
+          <Input label="Prezime" value={lastName} onChangeText={setLastName} />
           <Separator />
           <Separator />
           <Input
@@ -57,7 +57,11 @@ const RegisterProvider = ({ navigation }) => {
             keyboardType="phone-pad"
           />
           <Separator />
-          <Input label="Adresa" value={address} onChangeText={setAddress} />
+          <Input
+            label="Adresa"
+            value={addressValue}
+            onChangeText={setAddress}
+          />
           <Separator />
           <Separator />
           <Input label="Email" value={email} onChangeText={setEmail} />
@@ -80,7 +84,19 @@ const RegisterProvider = ({ navigation }) => {
           <Separator />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => dispatch(registerProvider())}
+            onPress={() =>
+              dispatch(
+                register({
+                  firstName,
+                  lastName,
+                  addressValue,
+                  telephone,
+                  email,
+                  password,
+                  type: 2,
+                })
+              )
+            }
           >
             <Text style={styles.buttonText}>KERIRAJ NALOG</Text>
           </TouchableOpacity>
