@@ -15,7 +15,10 @@ const getToken = ({ auth }) => auth.token
 
 function* fetchPickups() {
   const token = yield select(getToken)
-  const { pickups } = yield authorizedGet('/pickup', token)
+  const response = yield authorizedGet('/pickup', token)
+  if (response.error) throw new Error(response.error)
+
+  const { pickups } = response
 
   yield put({ type: 'FETCH_PICKUPS_SUCCESS', pickups })
 }

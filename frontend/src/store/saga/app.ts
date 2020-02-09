@@ -18,6 +18,7 @@ function* appStart() {
       yield put(appStartSuccess(token))
       yield put(fetchUser())
     } else {
+      yield put(appStartSuccess(''))
     }
   } catch (error) {
     yield put(appStartFailure(error))

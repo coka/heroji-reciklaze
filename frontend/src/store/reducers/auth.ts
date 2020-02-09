@@ -54,4 +54,5 @@ export default createReducer(initialState, {
     ...state,
     user,
   }),
+  LOG_OUT: () => initialState,
 })

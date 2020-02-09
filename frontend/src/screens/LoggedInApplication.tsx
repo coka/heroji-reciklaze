@@ -20,7 +20,7 @@ const shouldShowTabBar = (route: any): boolean => {
 }
 
 const LoggedInApplication = ({ navigation }) => {
-  const userType = useSelector(({ auth }) => auth.user.type)
+  const userType = useSelector(({ auth }) => auth?.user?.type)
   if (userType === 2)
     return (
       // Provider

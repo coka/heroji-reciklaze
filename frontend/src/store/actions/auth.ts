@@ -5,10 +5,11 @@ export const logIn = (email: string, password: string) =>
     password,
   } as const)
 
-export const logInSuccess = (token: string) =>
+export const logInSuccess = ({ token, user }) =>
   ({
     type: 'LOG_IN_SUCCESS',
     token,
+    user,
   } as const)
 
 export const logInFailure = (error: Error) =>
