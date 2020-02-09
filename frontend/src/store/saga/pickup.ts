@@ -7,6 +7,8 @@ import {
   acceptPickupFailure,
   declinePickupSuccess,
   declinePickupFailure,
+  deletePickupSuccess,
+  deletePickupFailure,
 } from '../actions/pickup'
 
 const getToken = ({ auth }) => auth.token
@@ -60,9 +62,9 @@ function* deletePickup(action) {
     const response = yield del('/pickup/' + action.id, token)
     if (response.error) throw new Error(response.error)
 
-    yield put(declinePickupSuccess(action.id))
+    yield put(deletePickupSuccess(action.id))
   } catch (error) {
-    yield put(declinePickupFailure(error))
+    yield put(deletePickupFailure(error))
   }
 }
 
